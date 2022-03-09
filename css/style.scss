@@ -1,0 +1,442 @@
+/* Start Variables */
+/** Colors */
+/*** Primary Colors */
+$moderate-blue: hsl(238, 40%, 52%);
+$soft-Red: hsl(358, 79%, 66%);
+$light-grayish-blue: hsl(239, 57%, 85%);
+$pale-red: hsl(357, 100%, 86%);
+/*** Neutral Colors */
+$dark-blue: hsl(212, 24%, 26%);
+$grayish-blue: hsl(211, 10%, 45%);
+$light-gray: hsl(223, 19%, 93%);
+$very-light-gray: hsl(228, 33%, 97%);
+$white: hsl(0, 0%, 100%);
+/*** Font Families */
+$font-family: 'Rubik', sans-serif;
+/** Media Queries Breakpoints */
+$maxMobile: "(max-width: 575px)";
+$minSmall: "(min-width: 576px)";
+$maxSmall: "(max-width: 767.5px)";
+$minMedium: "(min-width: 768px)";
+$maxMedium: "(max-width: 991px)";
+$minLarge: "(min-width: 992px)";
+$maxLarge: "(max-width: 1199px)";
+$minExtraLarge: "(min-width: 1200px)";
+$minDoubleExtraLarge: "(min-width: 1400px)";
+$transition-one: 0.3s;
+$transition-two: 0.5s;
+/* End Variables */
+/***********************************************************************/
+/* Start Mixins */
+/** Prefixer Mixin */
+@mixin prefixer($property, $value, $prefixes:()) {
+  #{$property} : $value;
+  @each $prefix in $prefixes {
+    #{"-" + $prefix + "-" + $property}: $value;
+  }
+}
+/* End Mixins */
+/***********************************************************************/
+/* Start Global Rules */
+* {
+  @include prefixer(box-sizing, border-box, webkit moz ms o);
+  padding: 0;
+  margin: 0;
+}
+body {
+  font: {
+    family: $font-family;
+    size: 16px;
+  }
+  @media #{$maxMobile} {
+    font-size: 14px;
+  }
+  &.scroll-locked {
+    overflow: hidden;
+  }
+}
+ul, ol {
+  list-style: none;
+}
+a {
+  text-decoration: none !important;
+  transition: $transition-one;
+}
+svg path {
+  transition: $transition-one;
+  pointer-events: none;
+}
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+// Small Screen
+@media #{$minSmall} {
+  .container {
+    max-width: 540px;
+  }
+}
+// Medium Screen
+@media #{$minMedium} {
+  .container {
+    max-width: 720px;
+  }
+}
+// Large Screen
+@media #{$minLarge} {
+  .container {
+    max-width: 960px;
+  }
+}
+// Extra Large Screen
+@media #{$minExtraLarge} {
+  .container {
+    max-width: 1140px;
+  }
+}
+// Double Extra Large Screen
+@media #{$minDoubleExtraLarge} {
+  .container {
+    max-width: 1320px;
+  }
+}
+/* End Global Rules */
+/***********************************************************************/
+/* Start Components */
+.main-paragraph {
+  line-height: 1.8;
+  @media #{$maxMedium} {
+    text-align: center;
+    font-size: 16px;
+  }
+  @media #{$maxMobile} {
+    font-size: 14px;
+  }
+}
+.main-submit-btn {
+  width: 90px;
+  background-color: $moderate-blue;
+  color: $white;
+  font-size: 16px;
+  text-transform: uppercase;
+  padding: 12px;
+  border: none;
+  @include prefixer(border-radius, 6px, webkit moz ms);
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
+  @media #{$maxMobile} {
+    order: 3;
+    font-size: 14px;
+  }
+}
+.main-textarea-field {
+  height: 90px;
+  line-height: 1.5;
+  color: $dark-blue;
+  padding: 15px 20px;
+  border: 1px solid $light-gray;
+  @include prefixer(border-radius, 6px, webkit moz);
+  caret-color: $dark-blue;
+  resize: none;
+  &:focus {
+    outline: none;
+    border-color: $moderate-blue;
+  }
+  @media #{$maxMobile} {
+    order: 1;
+  }
+}
+/* End Components */
+/***********************************************************************/
+.popup {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  .message-delete {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 360px;
+    background-color: $white;
+    padding: 25px;
+    @include prefixer(border-radius, 6px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    @media #{$maxMobile} {
+      width: 300px;
+    }
+    h3 {
+      color: $dark-blue;
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 500;
+      @media #{$maxMobile} {
+        font-size: 18px;
+      }
+    }
+    p {
+      color: $grayish-blue;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+    button {
+      width: 48%;
+      height: 40px;
+      line-height: 40px;
+      color: $white;
+      text-transform: uppercase;
+      border: none;
+      @include prefixer(border-radius, 6px, webkit moz ms);
+      cursor: pointer;
+      &.no {
+        background-color: $grayish-blue;
+      }
+      &.yes {
+        background-color: $soft-Red;
+      }
+    }
+  }
+}
+.interactive-comments {
+  background-color: $very-light-gray;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  .container {
+    max-width: 735px;
+    @media #{$maxMobile} {
+      font-size: 14px;
+    }
+  }
+}
+/* Start Comments */
+.comments {
+  .comment {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    background-color: $white;
+    padding: 25px;
+    margin-bottom: 25px;
+    @include prefixer(border-radius, 6px, webkit moz ms);
+    position: relative;
+    @media #{$maxMobile} {
+      flex-direction: column;
+    }
+    .score {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: fit-content;
+      background-color: $very-light-gray;
+      padding: 12px 10px;
+      text-align: center;
+      @include prefixer(border-radius, 10px, webkit moz ms);
+      @media #{$maxMobile} {
+        order: 2;
+        flex-direction: row;
+      }
+      svg {
+        cursor: pointer;
+        &:hover path {
+          fill: $moderate-blue;
+        }
+        &.icon-minus {
+          position: relative;
+          left: 1px;
+          @media #{$maxMobile} {
+            left: 0;
+          }
+        }
+        &.disabled {
+          pointer-events: none;
+        }
+      }
+      span {
+        display: block;
+        color: $moderate-blue;
+        margin: 18px auto;
+        font-weight: 500;
+        @media #{$maxMobile} {
+          margin: auto 18px;
+        }
+      }
+    }
+    .description {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      .user-info {
+        display: flex;
+        align-items: center;
+        img {
+          width: 32px;
+        }
+        .username {
+          margin: 0px 15px;
+          font-weight: 500;
+        }
+        .createdAt {
+          color: $grayish-blue;
+        }
+      }
+      .reply-btn {
+        color: $moderate-blue;
+        font-weight: 500;
+        @media #{$maxMobile} {
+          position: absolute;
+          bottom: 37px;
+          right: 25px;
+        }
+        svg {
+          margin-right: 4px;
+          position: relative;
+          top: 2px;
+          pointer-events: none;
+        }
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+      .content {
+        width: 100%;
+        color: $grayish-blue;
+        line-height: 1.5;
+        .to {
+          color: $moderate-blue;
+          font-weight: 500;
+        }
+      }
+    }
+    &.current-user {
+      .user-info {
+        .you {
+          display: inline-block;
+          background-color: $moderate-blue;
+          color: $white;
+          padding: 1px 6px;
+          margin-left: 8px; 
+          @include prefixer(border-radius, 2px, webkit moz ms);
+          font-size: 14px;
+        }
+      }
+      .control-btns {
+        @media #{$maxMobile} {
+          position: absolute;
+          bottom: 37px;
+          right: 25px;
+        }
+        a {
+          font-weight: 500;
+          &:hover {
+            opacity: 0.5;
+          }
+          &.delete-btn {
+            color: $soft-Red;
+            margin-right: 20px;
+          }
+          &.edit-btn {
+            color: $moderate-blue;
+            &.active {
+              pointer-events: none;
+              opacity: 0.5;
+            }
+          }
+          svg {
+            margin-right: 4px;
+            position: relative;
+            top: 2px;
+            pointer-events: none;
+          }
+        }
+      }
+      textarea {
+        flex-basis: 100%;
+      }
+      .update-btn {
+        margin-left: auto;
+      }
+    }
+  }
+  .replies {
+    padding-left: 76px;
+    position: relative;
+    @media #{$maxMobile} {
+      padding-left: 25px;
+    }
+    &::before {
+      content: '';
+      width: 2px;
+      height: 100%;
+      background-color: $light-gray;
+      position: absolute;
+      top: 0;
+      left: calc(25px + 15.5px);
+      @media #{$maxMobile} {
+        left: 0;
+      }
+    }
+  }
+}
+/* End Comments */
+/* Start Add Comment and Add Reply Fields */
+.add-comment-field,
+.add-reply-field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px;
+  background-color: $white;
+  padding: 25px;
+  margin-bottom: 25px;
+  @include prefixer(border-radius, 6px, webkit moz);
+  @media #{$maxMobile} {
+    justify-content: space-between;
+  }
+  img {
+    width: 42px;
+    @media #{$maxMobile} {
+      order: 2;
+      width: 32px;
+    }
+  }
+  textarea {
+    flex: 1;
+    @media #{$maxMobile} {
+      flex-basis: 100%;
+    }
+  }
+  .main-submit-btn {
+    @media #{$maxMobile} {
+      order: 3;
+      font-size: 14px;
+    }
+  }
+}
+/* End Add Comment and Add Reply Fields */
+.attribution {
+  background-color: $white;
+  font-weight: 500;
+  font-size: 11px;
+  text-align: center;
+  padding: 15px 0;
+  a {
+    color: $moderate-blue;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
